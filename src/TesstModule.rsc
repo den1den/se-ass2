@@ -2,7 +2,7 @@ module TesstModule
 import IO;
 
 int testTest() {
-  result = 1;
+  result = 2;
   println("Test ok");
   return result;
 }
