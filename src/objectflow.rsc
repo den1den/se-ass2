@@ -1,22 +1,25 @@
 module objectflow
 import lang::java::jdt::m3::Core;
 import lang::java::jdt::m3::AST;
+import analysis::flow::ObjectFlow; // Used to recognize the FlowProgram datatype
 import lang::java::flow::JavaToObjectFlow;
-import analysis::flow::ObjectFlow;
 import IO;
-alias OFG = rel[loc from, loc to];
 
 value m3Test(){ 
-	m = createM3FromEclipseProject(|project://eLib|);
-	p = createOFG(|project://eLib|);
-	
+	m = createM3();
 	ms = methods(m);
-	//dcls = p.decals;
 	
-	return ms;
+	p = createFP();
+	
+	return p;
 }
 
-value createFP() {
-	// Creates a FlowProgram
+FlowProgram createFP() {
+	// Creates a FlowProgram from the eLib project
 	return createOFG(|project://eLib|);
+}
+
+M3 createM3() {
+	// Creates a M3 from the eLib project
+	return createM3FromEclipseProject(|project://eLib|);
 }
