@@ -1,0 +1,17 @@
+import FlowGraphsAndClassDiagrams;
+import objectflow;
+import OFGTest;
+import analysis::flow::ObjectFlow;
+import lang::java::flow::JavaToObjectFlow;
+import List;
+import Relation;
+import lang::java::m3::Core;
+import IO;
+import vis::Figure; 
+import vis::Render;
+import lang::java::jdt::m3::AST;
+import IO;
+import String;
+_m = createM3();
+_f = createFP();
+p = createOFG(|project://SimpleOFGTest/|);

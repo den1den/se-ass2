@@ -6,13 +6,14 @@ import lang::java::flow::JavaToObjectFlow;
 import IO;
 import String;
 
-value lhsDiamonds() {
+void fixLhsDiamonds() {
 	// Add a diamond operator to all LHS object creations of a typed class.
 	// In this project we only look at the
-	clss = {|java+constructor:///java/util/HashMap/HashMap()|, |java+constructor:///java/util/LinkedList/LinkedList()|};
+	clss = {|java+constructor:///java/util/HashMap/HashMap()|, |java+constructor:///java/util/LinkedList/LinkedList()|}; //http://tutor.rascal-mpl.org/Rascal/Expressions/Values/Location/FieldSelection/FieldSelection.html#/Rascal/Expressions/Values/Location/Location.html
 	
 	m = createM3();
-	decls = m@declarations;
+	decls = m@declarations; //http://tutor.rascal-mpl.org/Rascal/Libraries/analysis/m3/Core/uses/uses.html#/Rascal/Libraries/analysis/m3/Core/Core.html
+	//http://tutor.rascal-mpl.org/Rascal/Rascal.html#/Rascal/Libraries/analysis/m3/m3.html
 	
 	for( cls <- clss ) {
 		cls_decls = {c | c <- m@uses,
@@ -21,9 +22,20 @@ value lhsDiamonds() {
 		outs = {[c[0], "new <replaceLast(cls.file, "()", "")>\u003C\u003E()"] | c <- cls_decls};
 		println("Missing diamond operator at:\n<outs>\n");
 	}
-	
-	return 0;
 }
+
+void fixLists() {
+	// Finds all usages of lists and checks what types are put in such a object
+	clss = {|java+constructor:///java/util/LinkedList/LinkedList()|};
+	
+	m = createM3();
+	usages = {u | u <- m@uses, u[1].scheme == "java+class" && u[1].path == "/java/util/LinkedList"}; // usages of a class
+	
+	f = createFP();
+	atts = {a | attribute(a) <- f.decls};
+}
+
+
 
 value m3Test(){ 
 	m = createM3();
