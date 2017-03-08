@@ -1,5 +1,7 @@
 module Main
 // Here refractoring suggestions are calculated
+// The tool can be ran from the command line using: import Main; main();
+// It assumes you have the eLib project inported in Eclipse, if not you can change this in the main method's body.
 
 import lang::java::jdt::m3::Core;
 import lang::java::jdt::m3::AST;
