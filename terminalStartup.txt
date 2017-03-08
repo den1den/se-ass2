@@ -4,6 +4,7 @@ import OFGTest;
 import analysis::flow::ObjectFlow;
 import lang::java::flow::JavaToObjectFlow;
 import List;
+import Set;
 import Relation;
 import lang::java::m3::Core;
 import IO;

@@ -32,7 +32,7 @@ OFG buildGraph(FlowProgram p)
   = { <as[i], fps[i]> | newAssign(x, cl, c, as) <- p.statements, constructor(c, fps) <- p.decls, i <- index(as) }
   + { <cl + "this", x> | newAssign(x, cl, _, _) <- p.statements }
   + { <s, t> | assign(t, _, s) <- p.statements }
-  + { <m + "return", t> | call(t, c, r, m, a) <- p.statements, t != |id:///| }
+  + { <m + "return", t> | call(t, _, _, m, _) <- p.statements, t != |id:///| }
   + { <as[i], fps[i]> | call(_, _, _, m, as) <- p.statements, method(m, fps) <- p.decls, i <- index(as) }
   + { <r, m + "this"> | call(_, _, r, m, _) <- p.statements }
   ;

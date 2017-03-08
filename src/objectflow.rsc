@@ -6,11 +6,12 @@ import lang::java::flow::JavaToObjectFlow;
 import IO;
 import String;
 import Set;
+import List;
 import FlowGraphsAndClassDiagrams;
 
 // usages of a class -> m = createM3(); usages = {u | u <- m@uses, u[1].scheme == "java+class" && u[1].path == "/java/util/LinkedList"};
 
-void fixLhsDiamonds() {
+void fixRhsDiamonds() {
 	// Add a diamond operator to all LHS object creations of a typed class.
 	// In this project we only look at the
 	clss = {|java+constructor:///java/util/HashMap/HashMap()|, |java+constructor:///java/util/LinkedList/LinkedList()|}; //http://tutor.rascal-mpl.org/Rascal/Expressions/Values/Location/FieldSelection/FieldSelection.html#/Rascal/Expressions/Values/Location/Location.html
@@ -28,8 +29,33 @@ void fixLhsDiamonds() {
 	}
 }
 
+void fixMap() {
+	// Find all usages of Maps
+	project = |project://eLib|;
+	f = createOFG(project);
+	ofg = buildGraph(f);
+	m = createM3FromEclipseProject(project);
+	
+	atts = {a | attribute(a) <- f.decls}; // zonder variables zoals Iterator i op Libary:95
+	for( att <- atts ) {
+		gen = {<from, to> | <from, to> <- ofg, to == att};
+		kill = {};
+		source_classes = {from | <from, to> <- prop(ofg, gen, kill, false), from.scheme == "java+class"};
+		
+		if(size(source_classes) > 0){
+			creation_types = { t | <x, t> <- m@types, x == att, t[0] == |java+interface:///java/util/Map|}; // t[1] contains already existing class parameters, like Collection<Object>
+			//println("for att: <att>\nsource_classes: <source_classes>\ncreation_types: <creation_types>\n\n");
+			
+			if(size(creation_types) > 0){
+				most_generic = findSuperClass(source_classes, m);
+				println("Map could be changed to Map\<Integer, <toJava(most_generic)>\> at <att>");
+			}
+		}
+	}
+}
+
 void fixLists() {
-	// Finds all usages of lists and checks what types are put in such a object
+	// Finds all usages of collections and checks what types are put in such a object
 	project = |project://eLib|;
 	f = createOFG(project);
 	ofg = buildGraph(f);
@@ -44,33 +70,17 @@ void fixLists() {
 		
 		if(size(source_classes) > 0){
 			creation_types = { t | <x, t> <- m@types, x == att, t[0] == |java+interface:///java/util/Collection|}; // t[1] contains already existing class parameters, like Collection<Object>
-			//creation_types = {<t> | interface(t, x) <- creation_types, t};
 			//println("for att: <att>\nsource_classes: <source_classes>\ncreation_types: <creation_types>\n\n");
 			
 			if(size(creation_types) > 0){
-				most_generic = findSuperClass(source_classes);
+				most_generic = findSuperClass(source_classes, m);
 				println("Collection could be changed to Collection\<<toJava(most_generic)>\> at <att>");
 			}
 		}
 	}
 }
 
-loc findSuperClass(set[loc] classes){
-	if(size(classes) > 1){
-		throw "TODO: classes \> 1: <classes>";
-	}
-	for(cls <- classes){
-		return cls;
-	}
-}
 
-value toJava(loc l){
-	id = replaceAll(substring(l.path, 1), "/", ".");
-	if(endsWith(id, ".this")){
-		return substring(id, 0, size(id) - 5);
-	}
-	return id;
-}
 
 value m3Test(){ 
 	m = createM3();
