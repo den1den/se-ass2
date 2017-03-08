@@ -6,6 +6,8 @@ import lang::java::flow::JavaToObjectFlow;
 import IO;
 import String;
 
+// usages of a class -> m = createM3(); usages = {u | u <- m@uses, u[1].scheme == "java+class" && u[1].path == "/java/util/LinkedList"};
+
 void fixLhsDiamonds() {
 	// Add a diamond operator to all LHS object creations of a typed class.
 	// In this project we only look at the
@@ -26,13 +28,18 @@ void fixLhsDiamonds() {
 
 void fixLists() {
 	// Finds all usages of lists and checks what types are put in such a object
-	clss = {|java+constructor:///java/util/LinkedList/LinkedList()|};
+	project = |project://eLib|;
+	f = createOFG(project);
+	ofg = buildGraph(f);
 	
-	m = createM3();
-	usages = {u | u <- m@uses, u[1].scheme == "java+class" && u[1].path == "/java/util/LinkedList"}; // usages of a class
-	
-	f = createFP();
 	atts = {a | attribute(a) <- f.decls};
+	atts = {|java+field:///Library/users|, |java+field:///Library/loans|};
+	
+	gen = {<from, to> | <from, to> <- ofg, to == |java+field:///Library/loans|};
+	kill = {};
+	
+	{f | <f, t> <- prop(ofg, gen, kill, false), f.scheme == "java+class"};
+	
 }
 
 

@@ -32,7 +32,7 @@ OFG buildGraph(FlowProgram p)
   = { <as[i], fps[i]> | newAssign(x, cl, c, as) <- p.statements, constructor(c, fps) <- p.decls, i <- index(as) }
   + { <cl + "this", x> | newAssign(x, cl, _, _) <- p.statements }
   + { <s, t> | assign(t, _, s) <- p.statements }
-  + { <m + "return", t> | call(t, c, r, m, a) <- p.statements }
+  + { <m + "return", t> | call(t, c, r, m, a) <- p.statements, t != |id:///| }
   + { <as[i], fps[i]> | call(_, _, _, m, as) <- p.statements, method(m, fps) <- p.decls, i <- index(as) }
   + { <r, m + "this"> | call(_, _, r, m, _) <- p.statements }
   ;
@@ -63,7 +63,7 @@ public void drawDiagram(OFG g) {
   classFigures =	{box(text("<a.path[1..]>"), id("<a>")) | <a, b> <- g} 
   				  + {box(text("<a.path[1..]>"), id("<a>")) | <b, a> <- g};
   classFigures = [c | c <- classFigures];
-  edges = [edge("<to>", "<from>") | <from,to> <- g ];  
+  edges = [edge("<from>", "<to>", toArrow(triangle(5))) | <from,to> <- g ];  
   
   render(scrollable(graph(classFigures, edges, hint("layered"), std(gap(10)), std(font("Bitstream Vera Sans")), std(fontSize(20)))));
 }
