@@ -5,6 +5,8 @@ import analysis::flow::ObjectFlow; // Used to recognize the FlowProgram datatype
 import lang::java::flow::JavaToObjectFlow;
 import IO;
 import String;
+import Set;
+import FlowGraphsAndClassDiagrams;
 
 // usages of a class -> m = createM3(); usages = {u | u <- m@uses, u[1].scheme == "java+class" && u[1].path == "/java/util/LinkedList"};
 
@@ -31,18 +33,44 @@ void fixLists() {
 	project = |project://eLib|;
 	f = createOFG(project);
 	ofg = buildGraph(f);
+	m = createM3FromEclipseProject(project);
 	
-	atts = {a | attribute(a) <- f.decls};
-	atts = {|java+field:///Library/users|, |java+field:///Library/loans|};
-	
-	gen = {<from, to> | <from, to> <- ofg, to == |java+field:///Library/loans|};
-	kill = {};
-	
-	{f | <f, t> <- prop(ofg, gen, kill, false), f.scheme == "java+class"};
-	
+	atts = {a | attribute(a) <- f.decls}; // zonder variables zoals Iterator i op Libary:95
+	for( att <- atts ) {
+		gen = {<from, to> | <from, to> <- ofg, to == att};
+		kill = {};
+		source_classes = {from | <from, to> <- prop(ofg, gen, kill, false), from.scheme == "java+class"};
+		
+		
+		if(size(source_classes) > 0){
+			creation_types = { t | <x, t> <- m@types, x == att, t[0] == |java+interface:///java/util/Collection|}; // t[1] contains already existing class parameters, like Collection<Object>
+			//creation_types = {<t> | interface(t, x) <- creation_types, t};
+			//println("for att: <att>\nsource_classes: <source_classes>\ncreation_types: <creation_types>\n\n");
+			
+			if(size(creation_types) > 0){
+				most_generic = findSuperClass(source_classes);
+				println("Collection could be changed to Collection\<<toJava(most_generic)>\> at <att>");
+			}
+		}
+	}
 }
 
+loc findSuperClass(set[loc] classes){
+	if(size(classes) > 1){
+		throw "TODO: classes \> 1: <classes>";
+	}
+	for(cls <- classes){
+		return cls;
+	}
+}
 
+value toJava(loc l){
+	id = replaceAll(substring(l.path, 1), "/", ".");
+	if(endsWith(id, ".this")){
+		return substring(id, 0, size(id) - 5);
+	}
+	return id;
+}
 
 value m3Test(){ 
 	m = createM3();
