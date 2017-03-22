@@ -7,10 +7,9 @@ c.id,
  ch_createdTime,
  ch_status,
  ch_mergeable,
- TIMEDIFF(MAX(r.rev_committedTime),c.ch_createdTime),
- MAX(r.rev_committedTime) - c.ch_createdTime,
- r.rev_committedTime,
- r.rev_patchSetNum
+ TIMESTAMPDIFF(SECOND, c.ch_createdTime, MAX(r.rev_committedTime)),
+ MAX(r.rev_committedTime),
+ MAX(r.rev_patchSetNum)
 FROM
     gm_libreoffice.t_change AS c
         LEFT JOIN
