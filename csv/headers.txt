@@ -1,8 +1,8 @@
 change_with_last_revision:
-"c.id","ch_changeIdNum","ch_project","ch_branch","ch_authorAccountId","ch_createdTime","ch_status","ch_mergeable","dt_t","r.rev_committedTime","r.rev_patchSetNum"
+"change_id","ch_changeIdNum","ch_project","ch_branch","ch_authorAccountId","ch_createdTime","ch_status","ch_mergeable","review_period","last_revision_time","revision_count"
 
 +-2:
-"r2_count","r2_dt_s","r2_dt_d","id","p_accountId","p_name","p_email","p_userName"
+"r2_count","r2_dt_s","r2_dt_d","person2_id","person2_accountId","p2_name","p2_email","p2_userName"
 
 reviews:
-"r_count","r_dt_s","r_dt_d","id","p_accountId","p_name","p_email","p_userName"
+"r_count","r_dt_s","r_dt_d","person_id","person_accountId","p_name","p_email","p_userName"

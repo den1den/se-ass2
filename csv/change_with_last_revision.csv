@@ -1,4 +1,4 @@
-"c.id","ch_changeIdNum","ch_project","ch_branch","ch_authorAccountId","ch_createdTime","ch_status","ch_mergeable","dt_t","r.rev_committedTime","r.rev_patchSetNum"
+"change_id","ch_changeIdNum","ch_project","ch_branch","ch_authorAccountId","ch_createdTime","ch_status","ch_mergeable","review_period","last_revision_time","revision_count"
 1,30916,"core","master","1000994","2016-11-17 00:08:54","NEW","1",17615,"2016-11-17 05:02:29",2
 2,30920,"dictionaries","master","1000863","2016-11-17 03:22:52","NEW","1",-121,"2016-11-17 03:20:51",1
 3,30915,"core","master","1000166","2016-11-16 23:48:09","NEW","0",-20,"2016-11-16 23:47:49",1

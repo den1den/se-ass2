@@ -1,4 +1,4 @@
-"r2_count","r2_dt_s","r2_dt_d","id","p_accountId","p_name","p_email","p_userName"
+"r2_count","r2_dt_s","r2_dt_d","person2_id","person2_accountId","p2_name","p2_email","p2_userName"
 23,58168562,673,1,1000994,"Mike Kaganski",038f8fa21bb358827cac6a7af3e9f62fb9f1e8c6,mikekaganski
 0,NULL,NULL,2,1000855,Jenkins,0ca2191015b0f2dd03f44d108d5039a6e24a4b00,ci
 0,NULL,NULL,3,1000863,"Aron Budea",820bf08ac9e412c90eec8c7b484d420ebb586ae4,bearon
