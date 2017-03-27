@@ -7,9 +7,9 @@ SELECT
     'ch_createdTime',
     'ch_status',
     'ch_mergeable',
-    'review_period',
-    'last_revision_time',
-    'revision_count'
+    'ch_review_period',
+    'ch_last_revision_time',
+    'ch_revision_count'
 
 UNION ALL SELECT 
     c.id,
@@ -30,5 +30,5 @@ FROM
 GROUP BY c.id
 HAVING
     TIMESTAMPDIFF(SECOND, c.ch_createdTime, MAX(r.rev_committedTime)) > 0
-INTO OUTFILE 'C:/ProgramData/MySQL/MySQL Server 5.7/Uploads/change_with_last_revision.csv' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"' LINES TERMINATED BY '
-';
+INTO OUTFILE 'C:/ProgramData/MySQL/MySQL Server 5.7/Uploads/change_with_last_revision.csv' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"' LINES TERMINATED BY '\n'
+;

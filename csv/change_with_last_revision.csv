@@ -1,4 +1,4 @@
-"change_id","ch_changeIdNum","ch_project","ch_branch","ch_authorAccountId","ch_createdTime","ch_status","ch_mergeable","review_period","last_revision_time","revision_count"
+"change_id","ch_changeIdNum","ch_project","ch_branch","ch_authorAccountId","ch_createdTime","ch_status","ch_mergeable","ch_review_period","ch_last_revision_time","ch_revision_count"
 "1","30916","core","master","1000994","2016-11-17 00:08:54","NEW","1","17615","2016-11-17 05:02:29","2"
 "5","30917","lode","master","1000166","2016-11-17 00:25:57","NEW","1","22","2016-11-17 00:26:19","2"
 "8","30881","core","master","1000169","2016-11-15 21:25:02","NEW","1","83050","2016-11-16 20:29:12","3"

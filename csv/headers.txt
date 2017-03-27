@@ -1,8 +1,17 @@
+change_with_files:
+"change_id","ch_files_changed","ch_total_lines_inserted","ch_total_lines_deleted","ch_last_revision_id","ch_only_source","ch_only_documentation","ch_contains_source"
+
+change_without_files:
+"change_id"
+
 change_with_last_revision:
-"change_id","ch_changeIdNum","ch_project","ch_branch","ch_authorAccountId","ch_createdTime","ch_status","ch_mergeable","review_period","last_revision_time","revision_count"
+"change_id","ch_changeIdNum","ch_project","ch_branch","ch_authorAccountId","ch_createdTime","ch_status","ch_mergeable","ch_review_period","ch_last_revision_time","ch_revision_count"
 
-+-2:
-"r2_count","r2_dt_s","r2_dt_d","person2_id","person2_accountId","p2_name","p2_email","p2_userName"
+people_with_changes:
+"p_id","p_accountId","p_name","p_email","p_userName","p_change_activity","p_ecosystem_tenure"
 
-reviews:
-"r_count","r_dt_s","r_dt_d","person_id","person_accountId","p_name","p_email","p_userName"
+people_with_history_review: (review is all history that is considered a review)
+"p_id","p_accountId","p_name","p_email","p_userName","p_review_activity","p_review_tenure"
+
+people_with_history_review+-2: (review is all history that has +-2)
+"p_id","p_accountId","p_name","p_email","p_userName","p_review_activity_2","p_review_tenure_2"
