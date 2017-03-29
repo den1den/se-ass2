@@ -15,7 +15,7 @@ FROM
             DATE(rev_committedTime) AS committedDate,
             r.id
     FROM
-        gm_libreoffice.t_revision AS r
+        gm_openstack.t_revision AS r
     #WHERE DATE(rev_createdTime) >= '2016-09-00'
 	#limit 100
 	) AS s ON s.createdDate <= d.`date`

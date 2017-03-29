@@ -13,9 +13,9 @@ UNION ALL SELECT
         MIN(c.ch_createdTime),
         NOW())
 FROM
-    gm_libreoffice.t_people AS p
+    gm_openstack.t_people AS p
         JOIN
-    gm_libreoffice.t_change AS c ON c.ch_authorAccountId = p.p_accountId
+    gm_openstack.t_change AS c ON c.ch_authorAccountId = p.p_accountId
 GROUP BY p.id
 INTO OUTFILE 'C:/ProgramData/MySQL/MySQL Server 5.7/Uploads/people_with_changes.csv' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"' LINES TERMINATED BY '\n'
 ;

@@ -24,9 +24,9 @@ UNION ALL SELECT
     MAX(r.rev_committedTime) AS last_revision_time,
     MAX(r.rev_patchSetNum) AS revision_count
 FROM
-    gm_libreoffice.t_change AS c
+    gm_openstack.t_change AS c
         LEFT JOIN
-    gm_libreoffice.t_revision AS r ON c.id = r.rev_changeId
+    gm_openstack.t_revision AS r ON c.id = r.rev_changeId
 GROUP BY c.id
 HAVING
     TIMESTAMPDIFF(SECOND, c.ch_createdTime, MAX(r.rev_committedTime)) > 0

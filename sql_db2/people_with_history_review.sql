@@ -13,9 +13,9 @@ UNION ALL SELECT
         MIN(h.hist_createdTime),
         NOW())
 FROM
-    gm_libreoffice.t_people AS p
+    gm_openstack.t_people AS p
 		JOIN
-	gm_libreoffice.t_history AS h ON h.hist_authorAccountId = p.p_accountId AND (
+	gm_openstack.t_history AS h ON h.hist_authorAccountId = p.p_accountId AND (
 		h.hist_message LIKE '%Looks good to me, approved%'
 		OR h.hist_message LIKE '%Do not submit%'
 		OR h.hist_message LIKE '%Code-Review%')
