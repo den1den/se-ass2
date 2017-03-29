@@ -9,8 +9,8 @@ SELECT
     'ch_mergeable',
     'ch_review_period',
     'ch_last_revision_time',
-    'ch_revision_count'
-
+    'ch_revision_count',
+    'ch_revision_count_alt'
 UNION ALL SELECT 
     c.id,
     ch_changeIdNum,
@@ -22,10 +22,11 @@ UNION ALL SELECT
     ch_mergeable,
     TIMESTAMPDIFF(SECOND, c.ch_createdTime, MAX(r.rev_committedTime)) AS review_period,
     MAX(r.rev_committedTime) AS last_revision_time,
-    MAX(r.rev_patchSetNum) AS revision_count
+    MAX(r.rev_patchSetNum) AS revision_count,
+    COUNT(r.id) AS revision_count_alt
 FROM
     gm_libreoffice.t_change AS c
-        LEFT JOIN
+        JOIN
     gm_libreoffice.t_revision AS r ON c.id = r.rev_changeId
 GROUP BY c.id
 HAVING

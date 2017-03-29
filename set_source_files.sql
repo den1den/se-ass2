@@ -1,4 +1,4 @@
-UPDATE `gm_libreoffice`.`t_file` AS f 
+UPDATE `t_file` AS f 
 SET 
     f.`t_isSource` = 1
 WHERE
@@ -16,7 +16,7 @@ SELECT
     SUBSTRING_INDEX(f.f_fileName, '.', - 1) AS ext,
     SUBSTRING_INDEX(f.f_fileName, '/', - 1) AS filename
 FROM
-    `gm_libreoffice`.`t_file` AS f
+    `t_file` AS f
 WHERE
     f.t_isSource is null
 GROUP BY ext
