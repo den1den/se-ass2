@@ -15,10 +15,7 @@ UNION ALL SELECT
 FROM
     gm_openstack.t_people AS p
 		JOIN
-	gm_openstack.t_history AS h ON h.hist_authorAccountId = p.p_accountId AND (
-		h.hist_message LIKE '%Looks good to me, approved%'
-		OR h.hist_message LIKE '%Do not submit%'
-		OR h.hist_message LIKE '%Code-Review%')
+	gm_openstack.t_history AS h ON h.hist_authorAccountId = p.p_accountId AND h.is_review = true
 GROUP BY p.id
 INTO OUTFILE 'C:/ProgramData/MySQL/MySQL Server 5.7/Uploads/people_with_history_review.csv' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"' LINES TERMINATED BY '\n'
 ;

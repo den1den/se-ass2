@@ -25,7 +25,7 @@ UNION ALL SELECT
     MAX(r.rev_patchSetNum) AS revision_count
 FROM
     gm_openstack.t_change AS c
-        LEFT JOIN
+        JOIN
     gm_openstack.t_revision AS r ON c.id = r.rev_changeId
 GROUP BY c.id
 HAVING
