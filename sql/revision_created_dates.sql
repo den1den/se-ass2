@@ -1,1 +1,1 @@
-SELECT DATE(rev_createdTime) FROM gm_libreoffice.t_revision order by DATE(rev_createdTime);
+SELECT DATE(rev_createdTime) FROM gm_openstack.t_revision order by DATE(rev_createdTime);
