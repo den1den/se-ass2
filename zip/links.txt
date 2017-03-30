@@ -1,0 +1,7 @@
+OpenStack Datas
+https://docs.google.com/spreadsheets/d/1HM82Ag8nurWZjxWWja5zW2Rgnnq4o1gi7LQ-3wnTGb4/pubhtml
+change_with_last_revision: was too big, so its in a sperate file
+change_with_files:         was too big, so its in a sperate file
+
+LibreOffice Datas
+https://docs.google.com/spreadsheets/d/1RfzggkaXFA31aLLLKZvrA7NfGqCf3m9Sbrr-nyAO8lw/pubhtml
